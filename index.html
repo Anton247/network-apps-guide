@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Учебная инструкция по настройке сетевых приложений</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #d9dee8;
+      --accent: #1769e0;
+      --accent-dark: #0f4fb0;
+      --ok: #0f7b54;
+      --code: #eef3f9;
+      --shadow: 0 14px 34px rgba(24, 35, 64, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      background: #111827;
+      color: #f9fafb;
+      overflow-y: auto;
+    }
+
+    .sidebar h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .sidebar p {
+      margin: 0 0 24px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+      margin-top: 22px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 9px 10px;
+      border-radius: 7px;
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: rgba(255, 255, 255, .1);
+      outline: none;
+    }
+
+    .progress-card {
+      margin-top: 22px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .progress-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .progress-bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: #4ade80;
+      transition: width .18s ease;
+    }
+
+    .progress-text {
+      margin: 8px 0 0;
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    main {
+      width: min(1040px, 100%);
+      padding: 42px clamp(18px, 4vw, 54px) 64px;
+    }
+
+    .intro {
+      margin-bottom: 28px;
+    }
+
+    .intro h2 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .intro p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .notice {
+      padding: 16px 18px;
+      border: 1px solid #cfd8ea;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      margin-top: 34px;
+    }
+
+    section > h2 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 4px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .badge {
+      align-self: flex-start;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #edf4ff;
+      color: #1559ba;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .card-body {
+      padding: 12px 18px 18px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      transition: border-color .18s ease, background-color .18s ease, opacity .18s ease;
+    }
+
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e8f1ff;
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .steps li.is-done {
+      border-color: #b9decf;
+      background: #f5fbf8;
+    }
+
+    .steps li.is-done > :not(.step-check) {
+      opacity: .72;
+    }
+
+    .step-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      grid-column: 2;
+      justify-self: start;
+      min-height: 38px;
+      margin-top: 2px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .step-check:hover,
+    .step-check:focus-within {
+      border-color: #9fc4b6;
+      color: var(--ok);
+    }
+
+    .steps li.is-done .step-check {
+      border-color: #9fcfbc;
+      background: #e9f7ef;
+      color: var(--ok);
+    }
+
+    .step-check input {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      accent-color: var(--ok);
+      cursor: pointer;
+    }
+
+    .steps p {
+      margin: 3px 0 0;
+    }
+
+    .codebox {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #cfd8ea;
+      border-radius: 8px;
+      background: var(--code);
+    }
+
+    .codebox code {
+      display: block;
+      min-width: 0;
+      overflow-x: auto;
+      white-space: nowrap;
+      color: #10233f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+    }
+
+    .copy-btn {
+      min-width: 112px;
+      min-height: 38px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .copy-btn:hover,
+    .copy-btn:focus {
+      background: var(--accent-dark);
+      outline: none;
+    }
+
+    .copy-btn.copied {
+      background: var(--ok);
+    }
+
+    .download-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .download-list li {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+    }
+
+    .download-list strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .shot {
+      margin-top: 12px;
+    }
+
+    .shot-toggle {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--accent-dark);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .shot-toggle:hover,
+    .shot-toggle:focus {
+      border-color: #b5c7e4;
+      background: #f4f8ff;
+      outline: none;
+    }
+
+    .shot img {
+      display: block;
+      width: min(100%, 340px);
+      max-height: 720px;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(24, 35, 64, .1);
+    }
+
+    .shot figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .image-placeholder {
+      display: none;
+      width: min(100%, 340px);
+      padding: 18px;
+      border: 1px dashed #a9b7cf;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .shot.is-missing img {
+      display: none;
+    }
+
+    .shot.is-missing .image-placeholder {
+      display: block;
+    }
+
+    .shot.is-collapsed img,
+    .shot.is-collapsed .image-placeholder {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      main {
+        padding-top: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .codebox {
+        grid-template-columns: 1fr;
+      }
+
+      .copy-btn {
+        width: 100%;
+      }
+
+      .steps li {
+        grid-template-columns: 32px minmax(0, 1fr);
+      }
+
+      .step-check {
+        grid-column: 2;
+        justify-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <h1>Настройка сетевых приложений</h1>
+      <p>HAPP и Karing. Все важные строки и ссылки можно скопировать одной кнопкой.</p>
+      <nav class="nav" aria-label="Навигация">
+        <a href="#apps">Установка приложений</a>
+        <a href="#happ">HAPP</a>
+        <a href="#happ-routing">Маршрутизация HAPP</a>
+        <a href="#karing">Karing</a>
+      </nav>
+      <div class="progress-card" aria-live="polite">
+        <strong>Прогресс</strong>
+        <div class="progress-bar"><span id="progressFill"></span></div>
+        <p class="progress-text" id="progressText">0 из 0 шагов</p>
+      </div>
+    </aside>
+
+    <main>
+      <header class="intro">
+        <h2>Учебная инструкция по настройке сетевых приложений</h2>
+        <p>Материал предназначен для ознакомления с настройкой клиентских приложений и сетевых профилей.</p>
+      </header>
+
+      <div class="notice">
+        Материал опубликован исключительно в образовательных целях и описывает общие принципы настройки клиентских сетевых приложений. Приведенные сведения не предназначены для обхода ограничений доступа, получения доступа к запрещенным материалам или нарушения законодательства какой-либо страны. Пользователь самостоятельно несет ответственность за соблюдение применимых законов и правил сервисов.
+      </div>
+
+      <section id="apps">
+        <h2>Установка приложений</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="card-header">
+              <h3>HAPP</h3>
+              <span class="badge">Вариант 1</span>
+            </div>
+            <div class="card-body">
+              <ul class="download-list">
+                <li>
+                  <strong>Android</strong>
+                  <a href="https://play.google.com/store/apps/details?id=com.happproxy">Google Play</a>
+                  <div class="codebox">
+                    <code>https://play.google.com/store/apps/details?id=com.happproxy</code>
+                    <button class="copy-btn" data-copy="https://play.google.com/store/apps/details?id=com.happproxy">Копировать</button>
+                  </div>
+                </li>
+                <li>
+                  <strong>iOS</strong>
+                  <a href="https://apps.apple.com/ru/app/happ/id1635156981">App Store</a>
+                  <div class="codebox">
+                    <code>https://apps.apple.com/ru/app/happ/id1635156981</code>
+                    <button class="copy-btn" data-copy="https://apps.apple.com/ru/app/happ/id1635156981">Копировать</button>
+                  </div>
+                </li>
+                <li>
+                  <strong>ПК (Windows / macOS / Linux)</strong>
+                  <a href="https://github.com/Happ-proxy/happ-desktop/releases">GitHub Releases</a>
+                  <div class="codebox">
+                    <code>https://github.com/Happ-proxy/happ-desktop/releases</code>
+                    <button class="copy-btn" data-copy="https://github.com/Happ-proxy/happ-desktop/releases">Копировать</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>Karing</h3>
+              <span class="badge">Вариант 2</span>
+            </div>
+            <div class="card-body">
+              <ul class="download-list">
+                <li>
+                  <strong>Android</strong>
+                  <a href="https://github.com/KaringX/karing/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk">Скачать APK</a>
+                  <div class="codebox">
+                    <code>https://github.com/KaringX/karing/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk</code>
+                    <button class="copy-btn" data-copy="https://github.com/KaringX/karing/releases/download/v1.2.19.2209/karing_1.2.19.2209_android_arm64-v8a.apk">Копировать</button>
+                  </div>
+                </li>
+                <li>
+                  <strong>iOS</strong>
+                  <a href="https://apps.apple.com/us/app/karing/id6472431552">App Store</a>
+                  <div class="codebox">
+                    <code>https://apps.apple.com/us/app/karing/id6472431552</code>
+                    <button class="copy-btn" data-copy="https://apps.apple.com/us/app/karing/id6472431552">Копировать</button>
+                  </div>
+                </li>
+                <li>
+                  <strong>ПК (Windows / macOS / Linux)</strong>
+                  <a href="https://github.com/KaringX/karing/releases">GitHub Releases</a>
+                  <div class="codebox">
+                    <code>https://github.com/KaringX/karing/releases</code>
+                    <button class="copy-btn" data-copy="https://github.com/KaringX/karing/releases">Копировать</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="happ">
+        <h2>HAPP</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <p>На основном экране HAPP можно удалить все имеющиеся соединения, чтобы не запутаться. Для этого нажимайте на три точки возле карточки сервера и затем выбирайте “Удалить”.</p>
+              <figure class="shot">
+                <img src="assets/happ-main.png" alt="Основной экран HAPP со списком серверов и кнопками настроек и добавления" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-main.png</code></div>
+                <figcaption>Основной экран HAPP.</figcaption>
+              </figure>
+              <figure class="shot">
+                <img src="assets/happ-delete-menu.png" alt="Меню карточки сервера HAPP с пунктом Удалить" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-delete-menu.png</code></div>
+                <figcaption>Меню карточки сервера: здесь можно удалить старое соединение.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Скопируйте ссылку подписки:</p>
+              <div class="codebox">
+                <code>https://109.206.243.105:2096/dogs/sub/shlg3tjhxepwxiiq</code>
+                <button class="copy-btn" data-copy="https://109.206.243.105:2096/dogs/sub/shlg3tjhxepwxiiq">Копировать</button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>В правом верхнем углу нажмите плюс и выберите “Вставить из буфера обмена”.</p>
+              <figure class="shot">
+                <img src="assets/happ-import-clipboard.png" alt="Меню добавления подписки HAPP с пунктом Вставить из буфера обмена" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-import-clipboard.png</code></div>
+                <figcaption>Меню добавления подписки.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>После этого появится карточка с сервером 109.206.243.105. Там будет три способа подключения. Сейчас работают XHTTP и TCP: первый и последний.</p>
+              <figure class="shot">
+                <img src="assets/happ-server-connected.png" alt="Карточка сервера HAPP с вариантами XHTTP, Hysteria и TCP" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-server-connected.png</code></div>
+                <figcaption>Карточка сервера с вариантами подключения.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <p>Можно нажать на TCP, а затем на круглую кнопку подключения сверху приложения.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="happ-routing">
+        <h2>Маршрутизация HAPP</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <p>Нажмите на шестеренку в левом верхнем углу и выберите “Маршрутизация”.</p>
+              <figure class="shot">
+                <img src="assets/happ-settings-routing.png" alt="Экран настроек HAPP с пунктом Маршрутизация" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-settings-routing.png</code></div>
+                <figcaption>Настройки HAPP, пункт “Маршрутизация”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите на три точки в правом верхнем углу и выберите “Создать новый профиль”.</p>
+              <figure class="shot">
+                <img src="assets/happ-routing-new-profile.png" alt="Меню маршрутизации HAPP с пунктом Создать новый профиль" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-routing-new-profile.png</code></div>
+                <figcaption>Создание нового профиля маршрутизации.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите на иконку обновления у “Гео-сайтов” и “Гео-айпи”, затем выберите “Редактировать правила”.</p>
+              <figure class="shot">
+                <img src="assets/happ-routing-geo-files.png" alt="Экран правил маршрутизации HAPP с Гео-сайтами и Гео-айпи" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-routing-geo-files.png</code></div>
+                <figcaption>Гео-сайты, гео-айпи и редактирование правил.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Выберите режим “Напрямую”.</p>
+              <figure class="shot">
+                <img src="assets/happ-routing-direct.png" alt="Экран Напрямую в правилах маршрутизации HAPP" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-routing-direct.png</code></div>
+                <figcaption>Раздел “Напрямую”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите “Показать тэги в гео-сайтах”.</p>
+              <figure class="shot">
+                <img src="assets/happ-routing-tags.png" alt="Кнопки Показать теги в гео-сайтах и гео-айпи" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-routing-tags.png</code></div>
+                <figcaption>Переход к тегам гео-сайтов и гео-айпи.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>В поле поиска введите “ru” и выберите все пункты, где встречается ru, например bank-ru.</p>
+              <figure class="shot">
+                <img src="assets/happ-geosite-ru.png" alt="Поиск ru в гео-сайтах HAPP" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/happ-geosite-ru.png</code></div>
+                <figcaption>Поиск тегов по запросу “ru”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <p>Вернитесь назад и сделайте то же самое для “Показать тэги в гео-айпи”. Там будет только один пункт с “ru”.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="karing">
+        <h2>Karing</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <p>Скопируйте строку ниже:</p>
+              <div class="codebox">
+                <code>naive+https://NaiveMieuru:CgLtfvcRj07Zhald@antonytech.space:443</code>
+                <button class="copy-btn" data-copy="naive+https://NaiveMieuru:CgLtfvcRj07Zhald@antonytech.space:443">Копировать</button>
+              </div>
+              <figure class="shot">
+                <img src="assets/karing-main.png" alt="Главный экран Karing" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-main.png</code></div>
+                <figcaption>Главный экран Karing.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Откройте Karing, выберите “Добавить профиль”, затем “Импорт из буфера обмена”.</p>
+              <figure class="shot">
+                <img src="assets/karing-add-profile.png" alt="Экран Karing Добавить профиль" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-add-profile.png</code></div>
+                <figcaption>Экран “Добавить профиль”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Заполните поле “Примечание”, например напишите “Naive”. Это просто название протокола.</p>
+              <figure class="shot">
+                <img src="assets/karing-clipboard-import.png" alt="Форма добавления подписки Karing с полем Примечание" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-clipboard-import.png</code></div>
+                <figcaption>Импорт из буфера и поле “Примечание”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>После добавления первого протокола можно добавить еще один. Скопируйте ссылку и вставьте ее в адресную строку браузера:</p>
+              <div class="codebox">
+                <code>https://disk.yandex.ru/d/k2NDc2Pzk16Cyw</code>
+                <button class="copy-btn" data-copy="https://disk.yandex.ru/d/k2NDc2Pzk16Cyw">Копировать</button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>На странице Яндекс Диска нажмите кнопку загрузки справа от “Сохранить на Яндекс.Диск”, затем нажмите “Загрузить”.</p>
+              <figure class="shot">
+                <img src="assets/yandex-disk-file.png" alt="Страница Яндекс Диска с файлом конфигурации" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/yandex-disk-file.png</code></div>
+                <figcaption>Страница файла на Яндекс Диске.</figcaption>
+              </figure>
+              <figure class="shot">
+                <img src="assets/yandex-disk-download.png" alt="Подтверждение загрузки файла с Яндекс Диска" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/yandex-disk-download.png</code></div>
+                <figcaption>Подтверждение загрузки файла.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>В Karing выберите “Добавить профиль”, затем “Импорт файла конфигурации” и “Выбрать файл”.</p>
+              <figure class="shot">
+                <img src="assets/karing-import-file.png" alt="Импорт файла конфигурации в Karing" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-import-file.png</code></div>
+                <figcaption>Импорт файла конфигурации.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>В файловом проводнике нажмите на три полоски в левом верхнем углу и выберите “Загрузки”.</p>
+              <figure class="shot">
+                <img src="assets/android-downloads.png" alt="Папка Загрузки в файловом проводнике Android" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/android-downloads.png</code></div>
+                <figcaption>Папка “Загрузки”.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите на три точки, выберите “Сортировать”, затем “изменениям (с новых)”. После списка папок будет файл “mieru-...”, нажмите на него.</p>
+              <figure class="shot">
+                <img src="assets/android-downloads-menu.png" alt="Меню файлового проводника Android с пунктом Сортировать" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/android-downloads-menu.png</code></div>
+                <figcaption>Меню сортировки.</figcaption>
+              </figure>
+              <figure class="shot">
+                <img src="assets/android-downloads-sort.png" alt="Выбор сортировки по изменениям с новых" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/android-downloads-sort.png</code></div>
+                <figcaption>Сортировка по изменениям с новых.</figcaption>
+              </figure>
+              <figure class="shot">
+                <img src="assets/android-downloads-file.png" alt="Файл mieru в папке Загрузки" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/android-downloads-file.png</code></div>
+                <figcaption>Файл конфигурации в списке загрузок.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Поле “Примечание” нужно сократить до 32 символов, например оставить “mieru”. Это название протокола.</p>
+              <figure class="shot">
+                <img src="assets/karing-ready.png" alt="Karing после добавления конфигурации" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-ready.png</code></div>
+                <figcaption>Karing после добавления конфигурации.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>На главном экране нажмите на красную круглую кнопку, чтобы включить подключение. Приложение само подберет профиль с большей скоростью.</p>
+              <figure class="shot">
+                <img src="assets/karing-connected.png" alt="Karing после подключения" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/karing-connected.png</code></div>
+                <figcaption>Активное подключение в Karing.</figcaption>
+              </figure>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-copy]");
+    const optionalImages = document.querySelectorAll("[data-optional-image]");
+    const shots = document.querySelectorAll(".shot");
+    const stepItems = document.querySelectorAll(".steps li");
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+    const storageKey = "network-guide-completed-steps";
+    const collapsedShotsKey = "network-guide-collapsed-shots-v2";
+    const completedSteps = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+    const savedCollapsedShots = localStorage.getItem(collapsedShotsKey);
+    const collapsedShots = new Set(
+      savedCollapsedShots
+        ? JSON.parse(savedCollapsedShots)
+        : Array.from(shots, (_, index) => `shot-${index + 1}`)
+    );
+
+    function saveCompletedSteps() {
+      localStorage.setItem(storageKey, JSON.stringify([...completedSteps]));
+    }
+
+    function updateProgress() {
+      const total = stepItems.length;
+      const done = completedSteps.size;
+      const percent = total ? Math.round((done / total) * 100) : 0;
+
+      if (progressFill) {
+        progressFill.style.width = `${percent}%`;
+      }
+
+      if (progressText) {
+        progressText.textContent = `${done} из ${total} шагов`;
+      }
+    }
+
+    function saveCollapsedShots() {
+      localStorage.setItem(collapsedShotsKey, JSON.stringify([...collapsedShots]));
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-1000px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.remove();
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const original = button.textContent;
+        try {
+          await copyText(button.dataset.copy);
+          button.textContent = "Скопировано";
+          button.classList.add("copied");
+          window.setTimeout(() => {
+            button.textContent = original;
+            button.classList.remove("copied");
+          }, 1800);
+        } catch {
+          button.textContent = "Не удалось";
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1800);
+        }
+      });
+    });
+
+    optionalImages.forEach((image) => {
+      image.addEventListener("error", () => {
+        image.closest(".shot")?.classList.add("is-missing");
+      });
+    });
+
+    shots.forEach((shot, index) => {
+      const id = `shot-${index + 1}`;
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "shot-toggle";
+      shot.prepend(button);
+
+      function syncShot() {
+        const collapsed = collapsedShots.has(id);
+        shot.classList.toggle("is-collapsed", collapsed);
+        button.textContent = collapsed ? "Показать скриншот" : "Скрыть скриншот";
+        button.setAttribute("aria-expanded", String(!collapsed));
+      }
+
+      button.addEventListener("click", () => {
+        if (collapsedShots.has(id)) {
+          collapsedShots.delete(id);
+        } else {
+          collapsedShots.add(id);
+        }
+
+        saveCollapsedShots();
+        syncShot();
+      });
+
+      syncShot();
+    });
+
+    stepItems.forEach((item, index) => {
+      const id = `step-${index + 1}`;
+      const label = document.createElement("label");
+      const checkbox = document.createElement("input");
+      const text = document.createElement("span");
+
+      checkbox.type = "checkbox";
+      checkbox.checked = completedSteps.has(id);
+      text.textContent = "Готово";
+      label.className = "step-check";
+      label.append(checkbox, text);
+      item.append(label);
+
+      item.classList.toggle("is-done", checkbox.checked);
+
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          completedSteps.add(id);
+        } else {
+          completedSteps.delete(id);
+        }
+
+        item.classList.toggle("is-done", checkbox.checked);
+        saveCompletedSteps();
+        updateProgress();
+      });
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>
