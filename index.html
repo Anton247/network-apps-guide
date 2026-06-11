@@ -187,6 +187,15 @@
       letter-spacing: 0;
     }
 
+    .important-heading {
+      padding: 10px 12px;
+      border: 1px solid #f4c56b;
+      border-left: 4px solid #d97706;
+      border-radius: 8px;
+      background: #fff8eb;
+      color: #7a3a04;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -500,7 +509,7 @@
       <nav class="nav" aria-label="Навигация">
         <a href="#apps">Установка приложений</a>
         <a href="#happ">HAPP</a>
-        <a href="#happ-routing">Маршрутизация HAPP</a>
+        <a href="#happ-routing" class="subnav">Маршрутизация HAPP</a>
         <a href="#karing">Karing</a>
         <a href="#karing-first-launch" class="subnav">Первый запуск</a>
         <a href="#karing-important-settings" class="subnav">Настройка Karing</a>
@@ -685,7 +694,7 @@
       </section>
 
       <section id="happ-routing">
-        <h2>Маршрутизация HAPP</h2>
+        <h2 class="important-heading">Маршрутизация HAPP</h2>
         <ol class="steps">
           <li>
             <div>
@@ -828,7 +837,7 @@
             </div>
           </li>
         </ol>
-        <h3 id="karing-important-settings">Настройка Karing. ВАЖНО!</h3>
+        <h3 id="karing-important-settings" class="important-heading">Настройка Karing. ВАЖНО!</h3>
         <ol class="steps">
           <li>
             <div>
