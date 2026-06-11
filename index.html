@@ -483,12 +483,13 @@
   <div class="shell">
     <aside class="sidebar">
       <h1>Настройка сетевых приложений</h1>
-      <p>HAPP и Karing. Все важные строки и ссылки можно скопировать одной кнопкой.</p>
+      <p>HAPP, Karing и WDTT. Все важные строки и ссылки можно скопировать одной кнопкой.</p>
       <nav class="nav" aria-label="Навигация">
         <a href="#apps">Установка приложений</a>
         <a href="#happ">HAPP</a>
         <a href="#happ-routing">Маршрутизация HAPP</a>
         <a href="#karing">Karing</a>
+        <a href="#wdtt">WDTT</a>
       </nav>
       <div class="progress-card" aria-live="polite">
         <strong>Прогресс</strong>
@@ -575,6 +576,34 @@
                     <code>https://github.com/KaringX/karing/releases</code>
                     <button class="copy-btn" data-copy="https://github.com/KaringX/karing/releases">Копировать</button>
                   </div>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <h3>WDTT</h3>
+              <span class="badge">Вариант 3</span>
+            </div>
+            <div class="card-body">
+              <ul class="download-list">
+                <li>
+                  <strong>Android</strong>
+                  <a href="https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk">Скачать APK</a>
+                  <div class="codebox">
+                    <code>https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk</code>
+                    <button class="copy-btn" data-copy="https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk">Копировать</button>
+                  </div>
+                </li>
+                <li>
+                  <strong>iOS</strong>
+                  <a href="https://github.com/anton48/vk-turn-proxy-ios">GitHub</a>
+                  <div class="codebox">
+                    <code>https://github.com/anton48/vk-turn-proxy-ios</code>
+                    <button class="copy-btn" data-copy="https://github.com/anton48/vk-turn-proxy-ios">Копировать</button>
+                  </div>
+                  <span class="hint">iOS-версия не тестировалась, порядок установки не проверен.</span>
                 </li>
               </ul>
             </div>
@@ -828,6 +857,61 @@
         </ol>
       </section>
 
+      <section id="wdtt">
+        <h2>WDTT</h2>
+        <div class="notice">
+          Этот вариант может быть полезен для учебной проверки сетевой связности в средах, где доступ организован через разрешенные списки.
+        </div>
+        <ol class="steps">
+          <li>
+            <div>
+              <p>На основном экране приложения заполните поле “Сервер”.</p>
+              <div class="codebox">
+                <code>179.43.174.253</code>
+                <button class="copy-btn" data-copy="179.43.174.253">Копировать</button>
+              </div>
+              <figure class="shot">
+                <img src="assets/wdtt-main.png" alt="Основной экран WDTT с полем сервера" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-main.png</code></div>
+                <figcaption>Основной экран WDTT.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите “Настройка VK Хешей” и заполните первые два поля.</p>
+              <div class="codebox">
+                <code>WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4</code>
+                <button class="copy-btn" data-copy="WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4">Копировать</button>
+              </div>
+              <div class="codebox">
+                <code>7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg</code>
+                <button class="copy-btn" data-copy="7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg">Копировать</button>
+              </div>
+              <figure class="shot">
+                <img src="assets/wdtt-vk-hashes.png" alt="Окно WDTT для настройки VK хешей" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-vk-hashes.png</code></div>
+                <figcaption>Окно настройки VK хешей.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p>Нажмите “Секреты” и введите пароль туннеля.</p>
+              <div class="codebox">
+                <code>6gszd6s3</code>
+                <button class="copy-btn" data-copy="6gszd6s3">Копировать</button>
+              </div>
+              <figure class="shot">
+                <img src="assets/wdtt-secrets.png" alt="Окно WDTT Секреты" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-secrets.png</code></div>
+                <figcaption>Окно “Секреты”.</figcaption>
+              </figure>
+            </div>
+          </li>
+        </ol>
+      </section>
+
     </main>
   </div>
 
@@ -839,7 +923,7 @@
     const progressFill = document.getElementById("progressFill");
     const progressText = document.getElementById("progressText");
     const storageKey = "network-guide-completed-steps";
-    const collapsedShotsKey = "network-guide-collapsed-shots-v2";
+    const collapsedShotsKey = "network-guide-collapsed-shots-v3";
     const completedSteps = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
     const savedCollapsedShots = localStorage.getItem(collapsedShotsKey);
     const collapsedShots = new Set(
