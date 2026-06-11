@@ -95,6 +95,12 @@
       outline: none;
     }
 
+    .nav a.subnav {
+      padding-left: 22px;
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
     .progress-card {
       margin-top: 22px;
       padding: 12px;
@@ -496,6 +502,8 @@
         <a href="#happ">HAPP</a>
         <a href="#happ-routing">Маршрутизация HAPP</a>
         <a href="#karing">Karing</a>
+        <a href="#karing-first-launch" class="subnav">Первый запуск</a>
+        <a href="#karing-add-profile" class="subnav">Добавление профиля</a>
         <a href="#wdtt">WDTT</a>
       </nav>
       <div class="progress-card" aria-live="polite">
@@ -746,7 +754,7 @@
 
       <section id="karing">
         <h2>Karing</h2>
-        <h3>Первый запуск</h3>
+        <h3 id="karing-first-launch">Первый запуск</h3>
         <ol class="steps">
           <li>
             <div>
@@ -819,7 +827,7 @@
             </div>
           </li>
         </ol>
-        <h3>Добавление профиля</h3>
+        <h3 id="karing-add-profile">Добавление профиля</h3>
         <ol class="steps">
           <li>
             <div>
