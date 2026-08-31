@@ -505,8 +505,9 @@
   <div class="shell">
     <aside class="sidebar">
       <h1>Настройка сетевых приложений</h1>
-      <p>HAPP, Karing, WDTT и FPTN. Все важные строки и ссылки можно скопировать одной кнопкой.</p>
+      <p>HAPP, Karing, CSQTT и FPTN. Все важные строки и ссылки можно скопировать одной кнопкой.</p>
       <nav class="nav" aria-label="Навигация">
+        <a href="#battery">Автозапуск и энергосбережение</a>
         <a href="#apps">Установка приложений</a>
         <a href="#happ">HAPP</a>
         <a href="#happ-routing" class="subnav">Маршрутизация HAPP</a>
@@ -514,7 +515,7 @@
         <a href="#karing-first-launch" class="subnav">Первый запуск</a>
         <a href="#karing-important-settings" class="subnav">Настройка Karing</a>
         <a href="#karing-add-profile" class="subnav">Добавление профиля</a>
-        <a href="#wdtt">WDTT</a>
+        <a href="#csqtt">CSQTT</a>
         <a href="#fptn">FPTN</a>
       </nav>
       <div class="progress-card" aria-live="polite">
@@ -533,6 +534,44 @@
       <div class="notice">
         Материал опубликован исключительно в образовательных целях и описывает общие принципы настройки клиентских сетевых приложений. Приведенные сведения не предназначены для обхода ограничений доступа, получения доступа к запрещенным материалам или нарушения законодательства какой-либо страны. Пользователь самостоятельно несет ответственность за соблюдение применимых законов и правил сервисов.
       </div>
+
+      <section id="battery">
+        <h2 class="important-heading">Автозапуск и энергосбережение. ВАЖНО!</h2>
+        <div class="notice">
+          Чтобы VPN-приложение не отключалось само по себе в фоне, для него нужно отключить оптимизацию батареи и разрешить автозапуск. Иначе система Android (особенно с оболочками вроде MIUI, EMUI, One UI) может принудительно завершать фоновое соединение. Это общий пункт для всех приложений из этой инструкции — HAPP, Karing, CSQTT и FPTN.
+        </div>
+        <h3>Xiaomi / MIUI</h3>
+        <ol class="steps">
+          <li>
+            <p>Откройте “Настройки” → “Приложения” → “Управление приложениями” и найдите нужное приложение (HAPP, Karing, CSQTT или FPTN).</p>
+          </li>
+          <li>
+            <p>Откройте пункт “Автозапуск” и включите его для приложения.</p>
+          </li>
+          <li>
+            <p>Откройте пункт “Экономия заряда батареи” и выберите “Без ограничений”.</p>
+          </li>
+        </ol>
+        <h3>Honor / MagicOS</h3>
+        <ol class="steps">
+          <li>
+            <p>Откройте “Настройки” → “Батарея” → “Оптимизация работы батареи”.</p>
+          </li>
+          <li>
+            <p>Найдите нужное приложение (HAPP, Karing, CSQTT или FPTN) в списке и выберите “Запретить”.</p>
+          </li>
+          <li>
+            <div>
+              <p>Затем в разделе “Использование батареи” откройте приложение, нажмите “Настройки запуска”, отключите “Автоматическое управление” и вручную включите “Автозапуск”, “Косвенный запуск” и “Работа в фоновом режиме”.</p>
+              <figure class="shot">
+                <img src="assets/honor-launch-settings.png" alt="Окно Настройки запуска в Honor с включёнными автозапуском, косвенным запуском и работой в фоне" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/honor-launch-settings.png</code></div>
+                <figcaption>Настройки запуска в Honor / MagicOS.</figcaption>
+              </figure>
+            </div>
+          </li>
+        </ol>
+      </section>
 
       <section id="apps">
         <h2>Установка приложений</h2>
@@ -609,17 +648,17 @@
 
           <article class="card">
             <div class="card-header">
-              <h3>WDTT</h3>
+              <h3>CSQTT</h3>
               <span class="badge">Вариант 3</span>
             </div>
             <div class="card-body">
               <ul class="download-list">
                 <li>
                   <strong>Android</strong>
-                  <a href="https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk">Скачать APK</a>
+                  <a href="https://github.com/amurcanov/csqtt/releases/download/v2.1.5/CSQTT-arm64-v8a.apk">Скачать APK</a>
                   <div class="codebox">
-                    <code>https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk</code>
-                    <button class="copy-btn" data-copy="https://github.com/amurcanov/proxy-turn-vk-android/releases/download/v1.2.2/WDTT-arm64-v8a.apk">Копировать</button>
+                    <code>https://github.com/amurcanov/csqtt/releases/download/v2.1.5/CSQTT-arm64-v8a.apk</code>
+                    <button class="copy-btn" data-copy="https://github.com/amurcanov/csqtt/releases/download/v2.1.5/CSQTT-arm64-v8a.apk">Копировать</button>
                   </div>
                 </li>
                 <li>
@@ -938,62 +977,49 @@
         </ol>
       </section>
 
-      <section id="wdtt">
-        <h2>WDTT</h2>
+      <section id="csqtt">
+        <h2>CSQTT</h2>
         <div class="notice">
-          Этот вариант может быть полезен для учебной проверки сетевой связности в средах, где доступ организован через разрешенные списки.
+          Если при установке приложение запросит разрешение на отправку уведомлений — разрешите его.
         </div>
         <ol class="steps">
           <li>
             <div>
-              <p>На основном экране приложения заполните поле “Сервер”.</p>
-              <div class="codebox">
-                <code>179.43.174.253</code>
-                <button class="copy-btn" data-copy="179.43.174.253">Копировать</button>
-              </div>
+              <p>На главном экране в правом верхнем углу нажмите на значок “три точки”.</p>
               <figure class="shot">
-                <img src="assets/wdtt-main.png" alt="Основной экран WDTT с полем сервера" data-optional-image>
-                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-main.png</code></div>
-                <figcaption>Основной экран WDTT.</figcaption>
+                <img src="assets/csqtt-main.png" alt="Главный экран CSQTT со значком трёх точек" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/csqtt-main.png</code></div>
+                <figcaption>Главный экран CSQTT.</figcaption>
               </figure>
             </div>
           </li>
           <li>
             <div>
-              <p>Нажмите “Настройка VK Хешей” и заполните первые два поля.</p>
-              <div class="codebox">
-                <code>WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4</code>
-                <button class="copy-btn" data-copy="WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4">Копировать</button>
-              </div>
-              <div class="codebox">
-                <code>7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg</code>
-                <button class="copy-btn" data-copy="7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg">Копировать</button>
-              </div>
+              <p>В открывшемся окне “Настройки” выберите роль “Участник” и закройте окно.</p>
               <figure class="shot">
-                <img src="assets/wdtt-vk-hashes.png" alt="Окно WDTT для настройки VK хешей" data-optional-image>
-                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-vk-hashes.png</code></div>
-                <figcaption>Окно настройки VK хешей.</figcaption>
+                <img src="assets/csqtt-settings.png" alt="Окно настроек CSQTT с выбором роли Участник" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/csqtt-settings.png</code></div>
+                <figcaption>Окно “Настройки”.</figcaption>
               </figure>
             </div>
           </li>
           <li>
             <div>
-              <p>Нажмите “Секреты” и введите пароль туннеля.</p>
+              <p>Откройте вкладку “Туннель”, скопируйте ссылку и вставьте её в поле “Ссылка csqtt”.</p>
               <div class="codebox">
-                <code>6gszd6s3</code>
-                <button class="copy-btn" data-copy="6gszd6s3">Копировать</button>
+                <code>csqtt://connect?v=2&amp;host=179.43.174.253&amp;peer=46000&amp;password=VrgHpzNNWUV6R2Nn&amp;hashes=WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4+7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg</code>
+                <button class="copy-btn" data-copy="csqtt://connect?v=2&amp;host=179.43.174.253&amp;peer=46000&amp;password=VrgHpzNNWUV6R2Nn&amp;hashes=WgM9zVI5sjCt2pkgV8TUGKC9qJZgPxf62oF6WrTraL4+7fSSkK5xQ0gQ3k_sUA129-eXzX_PK76JyGIRS3dH4kg">Копировать</button>
               </div>
               <figure class="shot">
-                <img src="assets/wdtt-secrets.png" alt="Окно WDTT Секреты" data-optional-image>
-                <div class="image-placeholder">Здесь будет скриншот: <code>assets/wdtt-secrets.png</code></div>
-                <figcaption>Окно “Секреты”.</figcaption>
+                <img src="assets/csqtt-tunnel.png" alt="Вкладка Туннель CSQTT с полем Ссылка csqtt" data-optional-image>
+                <div class="image-placeholder">Здесь будет скриншот: <code>assets/csqtt-tunnel.png</code></div>
+                <figcaption>Вкладка “Туннель”.</figcaption>
               </figure>
             </div>
           </li>
           <li>
             <div>
-              <p>После этих действий вернитесь на главный экран и нажмите “Подключить”. Подключение срабатывает не всегда с первого раза.</p>
-              <p>Если после нажатия доступ в интернет не появился, нажмите “Остановить”, затем снова “Подключить”. Если кнопки “Остановить” нет, сразу нажмите “Подключить” еще раз.</p>
+              <p>Вернитесь на экран “Подкл.” (первый пункт нижнего меню) и нажмите на букву “C” над надписью “Отключено”.</p>
             </div>
           </li>
         </ol>
@@ -1019,8 +1045,8 @@
             <div>
               <p>Скопируйте токен FPTN:</p>
               <div class="codebox">
-                <code>fptnb:HyIZADwUbwyZ/rlxUlGEwitW3+KZvikmG5XInikz5uwEWXpfH2MwBrY1RqZ8XTm4ycqi6gPLm+AjJ0tXX+i0SAzNVluudLZqhyd8ToaDGNeY6relMKhTc4qUm3BzkxV+9CUwbnbnQ58OAZMOAByiHBvLTsSo7f7jdGWMnKycydg6aPMj5zAzs+83PurHe0ypGPDI+3358YsLETcNouyHjOyNrkyUGhlXPM69vumbD+++f/vlJ7DtR+rC92NY0yU+XzAT5eigoNLX8BQi9r1VlT+PPqxHhGGaUm+VrSd+rLGHlXMwRyA8m2Rpf0gvva3brH800z4VLAJafAmggAVEHHLgb/1EjWB3Ae+ZrUNSoRojxtjhq1c+h+AyJImLBZ2oCVN+UWi2btNxl0uP0RNiPx9gE0KAbG8PcIKGFtbI4U/xIxm9fkrEvIKP2FOvOR0EtvIU0DlYJR6EBEyBDjkbi9e0QaJouYCL41FRDdGDA+tBAjAT/2f4aKKODRI503DrG2lfvqO0JYMjg3mJ0hYjayobAvf+MYAHlkEOrNQ52q6vtULa9UVIaTVtrgM2eQRUDQNZSayY50GO5vPwUyecvktbmgNYWVckiRjsYuJCUbgAqUTXyk7x7Ru7Bd3m9RHpkbk25LnNEDcQ02TYJat5FD7HUxFPelwED6HvvgEYdlEBLjs7EhmceHJ1UPl03GThBC9tjWjHBXVSwDWM/ioO3PQBTwQha2DVYhL7dB2qyKflmfp7F798H6ybH0mGJqjXtybJ1cRTZTWaqxVEz8UcOpHrDrQY2aKMum2tLzYBIVdZL7qnMTryFswDRG2gVTJY+owqkbZLfoU4rncRFkPZG9cCv69e0RZfGrSCUtwYqYIc8utFW3Pr8t1RdhsH01lDpn8N8uked9zkCXhcmecmOSZ45WiabB2XsXDd7bVchAopgpkT8rC8OxgBLBbsIjkXPwe7XiUySkARVEBOdoFo05BIzYbd6LViJwodc/B0EjvxBbEXo2EcjEqF1KoPO2hmsxyv4oTfRvanLHQBphJ80AmZmKdjA7blli+hes5VOh/QUrHtxqXuxBrJZN9DdAEJYUOMi7hjY+2XX1zQbNOl6ASV3nVyAPvYgGSANU0KM9bUMplU07E7o1s1eXcAOZJpVO4SWW+srBO4QRz6gPuUCrU532RrKUmrNlGgWzvgwOnKozE2as+91rcNGugNszzehBip659AbWYuixzvV8fkHWtRvkpKblVSnm+iCNbeVZ5u0bsDaMZZ5KQHsvFz8O+iPYO5S6gfBh3NwckP/+uf7+tssY1II4KjsGH/iHaF/FvKoIg6yOm5udLAC7VU39jtOSlyyflqaHG3Zaq/UhHPlC760Q0sryTavCIXbMNxNFGApTdY62X5kAa26nmbjDXggTPZXMDRA5jqpx2dIUEv1EufJ9j7NToUa0XwRX+mgGirmyM4HYdI+LJdTArj0Xx1mgTl1eHEdw2NpCbIlBdkU5lywzymQYXheA4kQb1vHDmAhO1/FwXkoIx6yQaHZT8VirUKaFOvWDmksFHrdhF7fTCsudS3y2TJXwUCAOagj/LCPkoggQ2Rm2Ys8jH9LGPS5UWSbtwBByjRBVhBM0xgA77b1dXKd4tdw6zWDnmKlj8adDIJgvUP4cAdMCfDxR2+6dBRKNqbB3rDbhtOw1Go5d6JOY0N8sM1bb0ygSSppqYNvsjkeqCBdkazQA5+9/axL4/nKzEmf7F+3iZnbIOZtZqvzUVs1orASsyzsDPk27QCMuEdm+OXF7vMor46ACi6NPYFFLB77CxpaxzkEz7azajmGSqz086EWYi5lac0cjLh0KouAGdm2hvCjuUR6SgGOwJkm9++/6W/4YEA2gBUJMgJpky9BycjbXY4IiyLcodODODoJf7+vpoo+oT5xI9P22hhmOvsOSt7EoSEX1DZIlpG7S9/vpc3/TC6ZKaHEQmw57fk1z+/Pj87v//jzx877Wyrjn6NVwVN65TX8pn0zHNdYuIYpxRU3A</code>
-                <button class="copy-btn" data-copy="fptnb:HyIZADwUbwyZ/rlxUlGEwitW3+KZvikmG5XInikz5uwEWXpfH2MwBrY1RqZ8XTm4ycqi6gPLm+AjJ0tXX+i0SAzNVluudLZqhyd8ToaDGNeY6relMKhTc4qUm3BzkxV+9CUwbnbnQ58OAZMOAByiHBvLTsSo7f7jdGWMnKycydg6aPMj5zAzs+83PurHe0ypGPDI+3358YsLETcNouyHjOyNrkyUGhlXPM69vumbD+++f/vlJ7DtR+rC92NY0yU+XzAT5eigoNLX8BQi9r1VlT+PPqxHhGGaUm+VrSd+rLGHlXMwRyA8m2Rpf0gvva3brH800z4VLAJafAmggAVEHHLgb/1EjWB3Ae+ZrUNSoRojxtjhq1c+h+AyJImLBZ2oCVN+UWi2btNxl0uP0RNiPx9gE0KAbG8PcIKGFtbI4U/xIxm9fkrEvIKP2FOvOR0EtvIU0DlYJR6EBEyBDjkbi9e0QaJouYCL41FRDdGDA+tBAjAT/2f4aKKODRI503DrG2lfvqO0JYMjg3mJ0hYjayobAvf+MYAHlkEOrNQ52q6vtULa9UVIaTVtrgM2eQRUDQNZSayY50GO5vPwUyecvktbmgNYWVckiRjsYuJCUbgAqUTXyk7x7Ru7Bd3m9RHpkbk25LnNEDcQ02TYJat5FD7HUxFPelwED6HvvgEYdlEBLjs7EhmceHJ1UPl03GThBC9tjWjHBXVSwDWM/ioO3PQBTwQha2DVYhL7dB2qyKflmfp7F798H6ybH0mGJqjXtybJ1cRTZTWaqxVEz8UcOpHrDrQY2aKMum2tLzYBIVdZL7qnMTryFswDRG2gVTJY+owqkbZLfoU4rncRFkPZG9cCv69e0RZfGrSCUtwYqYIc8utFW3Pr8t1RdhsH01lDpn8N8uked9zkCXhcmecmOSZ45WiabB2XsXDd7bVchAopgpkT8rC8OxgBLBbsIjkXPwe7XiUySkARVEBOdoFo05BIzYbd6LViJwodc/B0EjvxBbEXo2EcjEqF1KoPO2hmsxyv4oTfRvanLHQBphJ80AmZmKdjA7blli+hes5VOh/QUrHtxqXuxBrJZN9DdAEJYUOMi7hjY+2XX1zQbNOl6ASV3nVyAPvYgGSANU0KM9bUMplU07E7o1s1eXcAOZJpVO4SWW+srBO4QRz6gPuUCrU532RrKUmrNlGgWzvgwOnKozE2as+91rcNGugNszzehBip659AbWYuixzvV8fkHWtRvkpKblVSnm+iCNbeVZ5u0bsDaMZZ5KQHsvFz8O+iPYO5S6gfBh3NwckP/+uf7+tssY1II4KjsGH/iHaF/FvKoIg6yOm5udLAC7VU39jtOSlyyflqaHG3Zaq/UhHPlC760Q0sryTavCIXbMNxNFGApTdY62X5kAa26nmbjDXggTPZXMDRA5jqpx2dIUEv1EufJ9j7NToUa0XwRX+mgGirmyM4HYdI+LJdTArj0Xx1mgTl1eHEdw2NpCbIlBdkU5lywzymQYXheA4kQb1vHDmAhO1/FwXkoIx6yQaHZT8VirUKaFOvWDmksFHrdhF7fTCsudS3y2TJXwUCAOagj/LCPkoggQ2Rm2Ys8jH9LGPS5UWSbtwBByjRBVhBM0xgA77b1dXKd4tdw6zWDnmKlj8adDIJgvUP4cAdMCfDxR2+6dBRKNqbB3rDbhtOw1Go5d6JOY0N8sM1bb0ygSSppqYNvsjkeqCBdkazQA5+9/axL4/nKzEmf7F+3iZnbIOZtZqvzUVs1orASsyzsDPk27QCMuEdm+OXF7vMor46ACi6NPYFFLB77CxpaxzkEz7azajmGSqz086EWYi5lac0cjLh0KouAGdm2hvCjuUR6SgGOwJkm9++/6W/4YEA2gBUJMgJpky9BycjbXY4IiyLcodODODoJf7+vpoo+oT5xI9P22hhmOvsOSt7EoSEX1DZIlpG7S9/vpc3/TC6ZKaHEQmw57fk1z+/Pj87v//jzx877Wyrjn6NVwVN65TX8pn0zHNdYuIYpxRU3A">Копировать</button>
+                <code>fptnb:HwkRYCwLbOeMtS2zBwejgXDw7TJWInuQs4HSLAvX9gGMmLHbHKNSftVhJ4DyUN6z3mnS9JmTpasvdFokhmZrvkEl/f/7uYnFFxfiFtq6awvid5xDEvMs/ngft0Znie6l0bJoSHDuW8qLxEXiSkRBvXTSy9QT6+t5/KGPFhlzmPXg/Z9/WH8hbg2M0CUdTMVgBAj2OicZ8ZS/fnv19Wd9V61h0peM2t+QFU97377/fnlSplSc1oZUcz8eLxUvaqXK/u+PPl5FJKPkVPDoXDwGG49hsjilXe2JxJjuWzZU2uwmPiz8P0ZwP4z4i+MW0sXlUjBG58YZxOQMO1XtxACTd2/vjSyOzB6Dfr7euli8IBdHigUuZX2wtprJQbuwI0jz3NPDBfDH9DwLeYuna1gy0JHNKyFaeIYV42CNgFsUydANHOFj2krQQ+GliMMvEToVu2UzbdbatJHQxCtky+lTe5B1E0xNVSUR5DGxmBqd6xdTuUA8YbiBE/1SUw/RBcNih8UgHiJ8dVQlRwGEsUE5xWGpAJPWF28wNR6sAO0L8H2EUV7eux4ROvo6dliKG3TStNYAZuQWCQBE9kxxLK3Vri6ZhP3bsDJoqmbLgbtJb+2Ajt7slDhUZ0+uprj4kn6i2WueyuHpfRcvl+JrXlJw+CsbVQCukOhGPKH7IgxuZSvUzxOPQgD7VuQpFRwKpsqM7NpcaDE6qCi1s1gwSif2z4Jim6f7pcPGMFOx5yVsGjSsqNnYwkXY/A1bou9JqpRmUQBrLUHRSkH2nIVU9MXBYnwJXQgEb2fUvDELSsFmA9qmjq5GoRkfg2J8u01rehFaKtFINuEuaMz0xOlazZpdPXybe9Ddb+XRPiFldrqk137F2oJnvHEeMQ6laQs6vkPnnut1EdKJyqbK5lYTwVSMsvgk3vxWR0dxcnEij4+fSLw7gaNch/YpUKp7A+tlD0kXeV58wsJNBCekoty0hHAgv82weGp0jEjWLGXRlOe/+OyVF6Xq7so1kf92dFGHYkfT7clO3neUTU+A8rleRPYVzgB7rnsDZtT+G9nX7TqmZ0DGdL0ld9XYsxvDnrnenNlq/yw3ZC5NlG8OMcPkEHQ5KVxeu5nLvvwLbmhB3r7i2UoSTtm0zVlVbg0j7NuB4w4I64Bbbi45LT11/NDxbDCBWQLbjGWvtE/rQPAGYg5dATo7zr41kTh42t2z29gsRTYiNyxVrDN3LmjpNkRxO3oOI6uFM507JxhgaW3xUgmchqBaAQKjOgAYEaF3CGtfHhHbAWuSltbHPB+vvonwd5ePNm4PPtds5FqBAOHd1H4RD0bPD7/++MucxzUjmz2uM4AZ1iv8/No//rlsG3l4XRaXP0b/e4ZbwWPn9lLLfbeY3bS6DVKpHA</code>
+                <button class="copy-btn" data-copy="fptnb:HwkRYCwLbOeMtS2zBwejgXDw7TJWInuQs4HSLAvX9gGMmLHbHKNSftVhJ4DyUN6z3mnS9JmTpasvdFokhmZrvkEl/f/7uYnFFxfiFtq6awvid5xDEvMs/ngft0Znie6l0bJoSHDuW8qLxEXiSkRBvXTSy9QT6+t5/KGPFhlzmPXg/Z9/WH8hbg2M0CUdTMVgBAj2OicZ8ZS/fnv19Wd9V61h0peM2t+QFU97377/fnlSplSc1oZUcz8eLxUvaqXK/u+PPl5FJKPkVPDoXDwGG49hsjilXe2JxJjuWzZU2uwmPiz8P0ZwP4z4i+MW0sXlUjBG58YZxOQMO1XtxACTd2/vjSyOzB6Dfr7euli8IBdHigUuZX2wtprJQbuwI0jz3NPDBfDH9DwLeYuna1gy0JHNKyFaeIYV42CNgFsUydANHOFj2krQQ+GliMMvEToVu2UzbdbatJHQxCtky+lTe5B1E0xNVSUR5DGxmBqd6xdTuUA8YbiBE/1SUw/RBcNih8UgHiJ8dVQlRwGEsUE5xWGpAJPWF28wNR6sAO0L8H2EUV7eux4ROvo6dliKG3TStNYAZuQWCQBE9kxxLK3Vri6ZhP3bsDJoqmbLgbtJb+2Ajt7slDhUZ0+uprj4kn6i2WueyuHpfRcvl+JrXlJw+CsbVQCukOhGPKH7IgxuZSvUzxOPQgD7VuQpFRwKpsqM7NpcaDE6qCi1s1gwSif2z4Jim6f7pcPGMFOx5yVsGjSsqNnYwkXY/A1bou9JqpRmUQBrLUHRSkH2nIVU9MXBYnwJXQgEb2fUvDELSsFmA9qmjq5GoRkfg2J8u01rehFaKtFINuEuaMz0xOlazZpdPXybe9Ddb+XRPiFldrqk137F2oJnvHEeMQ6laQs6vkPnnut1EdKJyqbK5lYTwVSMsvgk3vxWR0dxcnEij4+fSLw7gaNch/YpUKp7A+tlD0kXeV58wsJNBCekoty0hHAgv82weGp0jEjWLGXRlOe/+OyVF6Xq7so1kf92dFGHYkfT7clO3neUTU+A8rleRPYVzgB7rnsDZtT+G9nX7TqmZ0DGdL0ld9XYsxvDnrnenNlq/yw3ZC5NlG8OMcPkEHQ5KVxeu5nLvvwLbmhB3r7i2UoSTtm0zVlVbg0j7NuB4w4I64Bbbi45LT11/NDxbDCBWQLbjGWvtE/rQPAGYg5dATo7zr41kTh42t2z29gsRTYiNyxVrDN3LmjpNkRxO3oOI6uFM507JxhgaW3xUgmchqBaAQKjOgAYEaF3CGtfHhHbAWuSltbHPB+vvonwd5ePNm4PPtds5FqBAOHd1H4RD0bPD7/++MucxzUjmz2uM4AZ1iv8/No//rlsG3l4XRaXP0b/e4ZbwWPn9lLLfbeY3bS6DVKpHA">Копировать</button>
               </div>
             </div>
           </li>
